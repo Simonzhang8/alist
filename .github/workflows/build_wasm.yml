@@ -32,8 +32,8 @@ jobs:
 
       - name: Install TinyGo
         run: |
-          wget https://github.com/tinygo-org/tinygo/releases/download/v0.25.0/tinygo_0.25.0_amd64.deb
-          sudo dpkg -i tinygo_0.25.0_amd64.deb
+          wget https://github.com/tinygo-org/tinygo/releases/download/v0.32.0/tinygo_0.32.0_amd64.deb
+          sudo dpkg -i tinygo_0.32.0_amd64.deb
           sudo apt-get install -f
 
       - name: Build WebAssembly
