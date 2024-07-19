@@ -1,4 +1,4 @@
-name: Build
+name: Build WebAssembly
 
 on:
   push:
@@ -30,15 +30,16 @@ jobs:
       - uses: benjlevesque/short-sha@v2.2
         id: short-sha
 
-      - name: Install TinyGo
+      - name: Install dependencies
         run: |
-          wget https://github.com/tinygo-org/tinygo/releases/download/v0.32.0/tinygo_0.32.0_amd64.deb
-          sudo dpkg -i tinygo_0.32.0_amd64.deb
-          sudo apt-get install -f
+          sudo snap install zig --classic --beta
+          docker pull crazymax/xgo:latest
+          go install github.com/crazy-max/xgo@latest
+          sudo apt install upx
 
       - name: Build WebAssembly
         run: |
-          tinygo build -o main.wasm -target wasm ./main.go
+          GOOS=js GOARCH=wasm go build -o main.wasm ./main.go
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
